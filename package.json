@@ -15,10 +15,15 @@
     "url": "https://github.com/kaelzhang/neuro-class.git"
   },
   "keywords": [
-    "class", "neuron"
+    "class",
+    "neuron"
   ],
   "author": "kael",
   "license": "BSD",
   "gitHead": "10a7e25845f06b9ec567a223c4f75f6ead3efd4e",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+
+  "dependencies": {
+    "lang": "~0.0.1"
+  }
 }
