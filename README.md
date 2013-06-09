@@ -1,16 +1,66 @@
-Neuro-class
-====
+# neuro-class
+
+> The best project ever.
 
 ## Getting Started
+Before anything taking its part, you should install [node](http://nodejs.org) and "cortex".
 
-### Install
+#### Install Node
 
-    # may be you should use `sudo`
-	sh install.sh
+Visit [http://nodejs.org](http://nodejs.org), download and install the proper version of nodejs.
 
-### Visit Documentations
+#### Install Cortex
 
-	nc start
+    # maybe you should use `sudo`
+    npm install -g cortex
 
-then visit: [http://localhost:1337](http://localhost:1337)
+## Using neuro-class In Your Project
 
+First, install 'neuro-class' directly with `ctx install` (recommended)
+	
+	ctx install neuro-class --save
+	
+or, you could update your package.json manually
+    
+    dependencies: {
+        'neuro-class': '<version-you-want>'
+    }
+    
+and install dependencies
+	
+	ctx install
+    
+Then, use `require` method in your module
+    
+    var neuro-class = require('neuro-class');
+    
+Finally, start cortex server
+    
+    ctx server
+    
+Then cortex will care all the rest.
+
+
+## API Documentation
+
+### neuro-class: constructor
+': constructor' means the `module.exports` of module 'neuro-class' is a constructor that we should use it with the `new` keyword
+
+	new neuro-class(options)
+	
+#### options
+- options.name {String}
+
+
+
+### neuro-class.\<method-name\>(arguments)
+Means this is a static method of `module.exports`
+
+#### arguments
+// arguments description here
+
+### .\<method-name\>(arguments)
+Mean this is a method of the instance
+
+#### arguments
+// arguments description here
