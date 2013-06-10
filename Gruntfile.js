@@ -16,6 +16,13 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        concat: {
+            dist: {
+                files: {
+                  'lib/index.js': ['lib/class.js','lib/events.js','lib/attrs.js'],
+                }
+            }
+        },
         // connect: {
         //     server: {
         //       options: {
@@ -36,6 +43,7 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-concat");
     // grunt.loadNpmTasks("grunt-contrib-connect");
     // grunt.loadNpmTasks("grunt-mocha");
     // grunt.loadNpmTasks("grunt-contrib-uglify");

@@ -1,7 +1,5 @@
 describe("neuro-class", function(){
-    describe("Class", function(){
-
-        var Class
+    var Class
             , myClass
             , subClass;
 
@@ -38,6 +36,8 @@ describe("neuro-class", function(){
                 done();
             });
         })
+        
+    describe("Class", function(){
 
         it('basic functionalities testing', function(){
             var ins = new myClass(2);
@@ -159,3 +159,12 @@ describe("neuro-class", function(){
         });
     });
 });
+
+
+
+
+
+
+
+
+

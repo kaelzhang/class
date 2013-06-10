@@ -1,50 +1,53 @@
 {
-    "name": "neuro-class",
-    "description": "The best project ever.",
-    "version": "0.1.0",
-    "homepage": "https://github.com/kaelzhang/neuro-class",
-    "author": {
-        "name": "supersheep",
-        "email": "supersheepxjy@gmail.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/kaelzhang/neuro-class"
-    },
-    "bugs": {
-        "url": "https://github.com/kaelzhang/neuro-class/issues"
-    },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/kaelzhang/neuro-class/blob/master/LICENSE-MIT"
-        }
-    ],
-    "engines": {
-        "node": ">= 0.6.0"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-mocha": "~0.3.1",
-        "grunt-contrib-connect": "~0.3.0",
-        "grunt-contrib-concat": "~0.1.2",
-        "grunt-contrib-uglify": "~0.1.1",
-        "grunt-contrib-jshint": "~0.1.1",
-        "grunt-contrib-watch": "~0.2.0"
-    },
-    "keywords": [],
-    "main": "lib/index.js",
-    "cortexDependencies": {
-        "neuro-lang": "~0.1.0",
-        "neuro-events": "~0.1.0",
-        "neuro-attrs": "~0.1.0"
-    },
-    "cortexExactDependencies": {
-        "neuro-lang": "0.1.0",
-        "neuro-events": "0.1.0",
-        "neuro-attrs": "0.1.0"
+  "name": "neuro-class",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kaelzhang/neuro-class",
+  "author": {
+    "name": "supersheep",
+    "email": "supersheepxjy@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaelzhang/neuro-class"
+  },
+  "bugs": {
+    "url": "https://github.com/kaelzhang/neuro-class/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/kaelzhang/neuro-class/blob/master/LICENSE-MIT"
     }
+  ],
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-mocha": "~0.3.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.1.1",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0"
+  },
+  "keywords": [],
+  "main": "lib/index.js",
+  "cortexDependencies": {
+    "neuro-lang": "~0.1.0",
+    "neuro-events": "~0.1.0",
+    "neuro-attrs": "~0.1.0"
+  },
+  "cortexExactDependencies": {
+    "neuro-lang": "0.1.0",
+    "neuro-events": "0.1.0",
+    "neuro-attrs": "0.1.0"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1"
+  }
 }
