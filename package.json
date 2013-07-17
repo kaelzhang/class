@@ -37,16 +37,15 @@
   },
   "keywords": [],
   "main": "lib/index.js",
-  "cortexDependencies": {
-    "neuro-lang": "~0.1.0",
-    "neuro-events": "~0.1.0",
-    "neuro-attrs": "~0.1.0"
+  "cortex": {
+      "dependencies": {
+        "lang": "~0.1.0"
+      },
+      "exactDependencies": {
+        "lang": "0.1.0"
+      }
   },
-  "cortexExactDependencies": {
-    "neuro-lang": "0.1.0",
-    "neuro-events": "0.1.0",
-    "neuro-attrs": "0.1.0"
-  },
+  
   "dependencies": {
     "grunt": "~0.4.1"
   }
