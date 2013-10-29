@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaelzhang/neuro-class"
+    "url": "https://github.com/kaelzhang/class"
   },
   "bugs": {
-    "url": "https://github.com/kaelzhang/neuro-class/issues"
+    "url": "https://github.com/kaelzhang/class/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/kaelzhang/neuro-class/blob/master/LICENSE-MIT"
+      "url": "https://github.com/kaelzhang/class/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
