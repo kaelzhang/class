@@ -4,9 +4,9 @@ var _       = require('underscore');
 var Class   = require('../');
 var expect  = require('./lib/expect');
 
-describe("Neuron: oop/events", function(){
+describe("events", function(){
 
-describe("NR.Class ext: events", function(){
+describe("Class ext: events", function(){
     var EventClass = Class({
             Implements: 'events',
             a: 1,
@@ -32,33 +32,31 @@ describe("NR.Class ext: events", function(){
         });
         
         
-        it("could deal with function overloading, and register a list of event handlers", function(){
-            var flag1 = true,
-                flag2 = true;
+        // it("could deal with function overloading, and register a list of event handlers", function(){
+        //     var flag1 = true,
+        //         flag2 = true;
                 
-            var obj = new EventClass().on({
-                    event1: function(){
-                        flag1 = !flag1;
-                    },
+        //     var obj = new EventClass().on({
+        //             event1: function(){
+        //                 flag1 = !flag1;
+        //             },
                     
-                    event2: function(){
-                        flag2 = !flag2;
-                    }
-                });
+        //             event2: function(){
+        //                 flag2 = !flag2;
+        //             }
+        //         });
             
-            obj.fire('event1');
-            expect(flag1).toBe(false);
+        //     obj.fire('event1');
+        //     expect(flag1).toBe(false);
             
-            obj.fire('event2');
-            expect(flag2).toBe(false);
-        });
+        //     obj.fire('event2');
+        //     expect(flag2).toBe(false);
+        // });
         
         it("the `this` object should be the current instance", function(){
-            var obj = new EventClass().on({
-                    increase: function(){
-                        this.a ++;
-                    }
-                });
+            var obj = new EventClass().on('increase', function(){
+                this.a ++;
+            });
             
             expect(obj.a).toBe(1);
             
@@ -69,16 +67,12 @@ describe("NR.Class ext: events", function(){
         it("could register more than one handlers to a same event type", function(){
             var obj = new EventClass();
             
-            obj.on({
-                increase: function(){
-                    this.a ++;
-                }
+            obj.on('increase', function(){
+                this.a ++;
             });
             
-            obj.on({
-                increase: function(){
-                    this.a ++;
-                }
+            obj.on('increase', function(){
+                this.a ++;
             });
         
             expect(obj.a).toBe(1);
@@ -90,22 +84,18 @@ describe("NR.Class ext: events", function(){
         it("the execution of handlers should be maintained by registering sequence", function(){
             var obj = new EventClass();
             
-            obj.on({
-                increase: function(){
-                    this.a ++;
-                }
+            obj.on('increase', function(){
+                this.a ++;
             });
             
-            obj.on({
-                increase: function(){
-                    this.c = this.a * this.b;
-                }
+            obj.on('increase', function(){
+                this.c = this.a * this.b;
             });
             
             expect(obj.c).toBe(undefined);
             
             obj.fire('increase');
-            expect(obj.c).not.toBe(2);
+            expect(obj.c === 2).toBe(false);
             expect(obj.c).toBe(4);
         });
     });
@@ -114,9 +104,7 @@ describe("NR.Class ext: events", function(){
     
         it("should return the instance", function(){
             var handler = function(){},
-                obj = new EventClass().on({
-                    increase: handler
-                })
+                obj = new EventClass().on('increase', handler);
         
             expect(obj.off('increase', handler)).toBe(obj);
             expect(obj.off('increase')).toBe(obj);
@@ -133,9 +121,7 @@ describe("NR.Class ext: events", function(){
                 handler = function(){
                     flag ++;  
                 },
-                obj = new EventClass().on({
-                    increase: handler
-                });
+                obj = new EventClass().on('increase', handler);
             
             obj.fire('increase');
             expect(flag).toBe(2);
