@@ -5,7 +5,7 @@ var Class   = require('../');
 var expect  = require('./lib/expect');
 
 
-describe('Neuron: oop/attrs', function(){
+describe('attrs', function(){
 
 describe('ext: attrs', function(){
 
@@ -21,8 +21,7 @@ describe('ext: attrs', function(){
                 },
                 
                 b: {
-                    value: 2,
-                    writeOnce: true
+                    value: 2
                 }
             });
         
@@ -49,8 +48,7 @@ describe('ext: attrs', function(){
                 },
                 
                 b: {
-                    value: 2,
-                    writeOnce: true
+                    value: 2
                 }
             });
         
@@ -280,8 +278,7 @@ describe('ext: attrs', function(){
                 },
                 
                 b: {
-                    value: 1,
-                    writeOnce: true
+                    value: 1
                 }
             }),
             
@@ -297,8 +294,7 @@ describe('ext: attrs', function(){
                 },
                 
                 b: {
-                    value: 1,
-                    writeOnce: true
+                    value: 1
                 }
             });
         
@@ -318,20 +314,6 @@ describe('ext: attrs', function(){
             
             expect(my.get('a')).toBe(1);
             // expect(my2.get('a')).toBe(2);
-        });
-            
-        it('controller: writeOnce', function(){
-            expect(my.get('b')).toBe(2);
-            // expect(my2.get('b')).toBe(2);
-            
-            expect(my.set('b', 3)).toBe(false);
-            // expect(my2.set('b', 3)).toBe(true);
-            
-            expect(my.get('b')).toBe(2);
-            // expect(my2.get('b')).toBe(3);
-            
-            expect(my2.set('b', 4)).toBe(false);
-            // expect(my2.get('b')).toBe(3);
         });
         
     })();
@@ -402,7 +384,7 @@ describe('ext: attrs', function(){
     
     describe(".removeAttr(key)", function(){
         var myClass = Class({
-                Implements: 'attrs'
+                // Implements: 'attrs'
             }, {
                 a: {
                     value: 1
@@ -469,12 +451,12 @@ describe('ext: attrs', function(){
             expect(sub.get('a')).toBe(10);
         });
         
-        it("would never inherit attributes from implements", function(){
-            var im = new implementClass();
+        // xit("would never inherit attributes from implements", function(){
+        //     var im = new implementClass();
         
-            expect(im.get('e')).toBe(5);
-            expect(im.get('a')).toBe(undefined);
-        });
+        //     expect(im.get('e')).toBe(5);
+        //     expect(im.get('a')).toBe(undefined);
+        // });
     
     });
     
@@ -498,16 +480,6 @@ describe('ext: attrs', function(){
         it("if sub-class has no attrs, setter and getter should be properly initialized", function(){
             
             var 
-            
-            ins = new Sub;
-        
-            expect(ins.get('a')).toBe(1);
-        });
-        
-        it("if attributes of superclass changes after the declaration of sub-class, sub-class should not be affected", function(){
-            Parent.ATTRS.a.value = 2;
-            
-            var
             
             ins = new Sub;
         
