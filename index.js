@@ -223,7 +223,7 @@ function _Class(base, proto, attrs){
     newProto.constructor = newClass;
     
     // Set class attributes
-    attributes.path(newClass, attrs);
+    attributes.patch(newClass, attrs);
     
     return newClass;
 };
