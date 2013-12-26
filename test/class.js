@@ -1,7 +1,13 @@
+'use strict';
+
+var _       = require('underscore');
+var Class   = require('../');
+var expect  = require('./lib/expect');
+
+
 describe('Neuron: oop/class', function(){
 
-
-describe('NR.Class', function(){
+describe('Class', function(){
     var Class = NR.Class,
         
         myClass = Class({

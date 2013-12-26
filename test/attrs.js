@@ -1,8 +1,13 @@
+'use strict';
+
+var _       = require('underscore');
+var Class   = require('../');
+var expect  = require('./lib/expect');
+
+
 describe('Neuron: oop/attrs', function(){
 
-var Class = NR.Class;
-
-describe('NR.Class ext: attrs', function(){
+describe('ext: attrs', function(){
 
     it('will unlink the attributes of a instance with the presets', function(){
         var myClass = Class({
@@ -338,11 +343,11 @@ describe('NR.Class ext: attrs', function(){
             Implements: 'attrs'
         }, {
             a: {
-                validator: NR.isNumber
+                validator: _.isNumber
             },
             
             b: {
-                validator: NR.isString
+                validator: _.isString
             }
         }),
         
@@ -477,7 +482,7 @@ describe('NR.Class ext: attrs', function(){
     describe("attributes inheritance: special situations", function(){
         var
         
-        Parent = NR.Class({
+        Parent = Class({
             Implements: 'attrs'   
         }, {
             a: {
@@ -486,7 +491,7 @@ describe('NR.Class ext: attrs', function(){
             
         }),
         
-        Sub = NR.Class({
+        Sub = Class({
             Extends: Parent
         });
     

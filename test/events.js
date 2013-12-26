@@ -1,20 +1,18 @@
+'use strict';
+
+var _       = require('underscore');
+var Class   = require('../');
+var expect  = require('./lib/expect');
+
 describe("Neuron: oop/events", function(){
 
 describe("NR.Class ext: events", function(){
-
-    var Class,EventClass;
-
-    beforeEach(function(done){
-        NR.use(["neuro-class@0.1.0"],function(mod) {
-            Class = mod;
-            EventClass = Class({
-                Implements: 'events',
-                a: 1,
-                b: 2
-            });
-            done();
+    var EventClass = Class({
+            Implements: 'events',
+            a: 1,
+            b: 2
         });
-    });
+
 
     describe(".on(), feated with .fire()", function(){
         it("could register a sync event handler", function(){
@@ -24,13 +22,13 @@ describe("NR.Class ext: events", function(){
                 flag = !flag
             });
         
-            expect(flag).to.be.true;
+            expect(flag).toBe(true);
             
             obj.fire('myEvent');
-            expect(flag).to.be.false;
+            expect(flag).toBe(false);
             
             obj.fire('myEvent');
-            expect(flag).to.be.true;
+            expect(flag).toBe(true);
         });
         
         
@@ -49,10 +47,10 @@ describe("NR.Class ext: events", function(){
                 });
             
             obj.fire('event1');
-            expect(flag1).to.be.false;
+            expect(flag1).toBe(false);
             
             obj.fire('event2');
-            expect(flag2).to.be.false;
+            expect(flag2).toBe(false);
         });
         
         it("the `this` object should be the current instance", function(){
@@ -104,10 +102,10 @@ describe("NR.Class ext: events", function(){
                 }
             });
             
-            expect(obj.c).to.be.undefined;
+            expect(obj.c).toBe(undefined);
             
             obj.fire('increase');
-            expect(obj.c).to.not.equal(2);
+            expect(obj.c).not.toBe(2);
             expect(obj.c).toBe(4);
         });
     });
@@ -120,14 +118,14 @@ describe("NR.Class ext: events", function(){
                     increase: handler
                 })
         
-            expect(obj.off('increase', handler)).to.deep.equal(obj);
-            expect(obj.off('increase')).to.deep.equal(obj);
-            expect(obj.off()).to.deep.equal(obj);
+            expect(obj.off('increase', handler)).toBe(obj);
+            expect(obj.off('increase')).toBe(obj);
+            expect(obj.off()).toBe(obj);
             
             // error invocation
-            expect(obj.off(null)).to.deep.equal(obj);
-            expect(obj.off(null, null)).to.deep.equal(obj);
-            expect(obj.off(null, handler)).to.deep.equal(obj);
+            expect(obj.off(null)).toBe(obj);
+            expect(obj.off(null, null)).toBe(obj);
+            expect(obj.off(null, handler)).toBe(obj);
         });
         
         it("could remove a specific handler of a certain type: .off(type, fn)", function(){
@@ -200,14 +198,15 @@ describe("NR.Class ext: events", function(){
     });
     
     
-    // describe(".fire()", function(){
+    describe(".fire()", function(){
         
-    //     it("normal fire, which tested before", function(){
-    //         expect().toBe();
-    //     });
-    // });
+        it("normal fire, which tested before", function(){
+            expect().toBe();
+        });
+    });
 
     
 });
     
 });
+
