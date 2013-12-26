@@ -5,8 +5,7 @@
 
 var _           = require('underscore');
 var clone       = require('clone');
-var node_util   = require('util');
-var events      = require('events');
+var attributes  = require('./lib/attrs');
 
 /**
  * module  oop/class
@@ -102,16 +101,6 @@ function implement(proto, extensions, override){
     extensions.forEach(function(alien){
         implementOne(this, alien, override);
     }, proto);
-};
-
-
-/**
- * method to set new attributes and inherit from super class simultaniously
- */
-function setAttrs(class_, attrs){
-    var parent = class_.prototype.superClass;
-    
-    class_.ATTRS = _.extend(attrs || {}, clone(parent && parent.ATTRS), false);
 };
 
 
@@ -217,7 +206,8 @@ function _Class(base, proto, attrs){
         // user custom prototype > ext > super class prototype
         exts && implement(newProto, exts, true);
         
-        newProto.superClass = base;
+        // bring correspondence with `util` of node.js
+        newClass.super_ = base;
         _.extend(newProto, proto);
         
     }else{
@@ -233,10 +223,7 @@ function _Class(base, proto, attrs){
     newProto.constructor = newClass;
     
     // Set class attributes
-    // Setting attrs with NR.Class(proto, attrs) is more recommended than NR.Class.setAttrs which is deprecated, 
-    //      because it is clear and less of further problems to declare attributes during the creation of a new class.
-    // Attrs will always be initialized, 
-    setAttrs(newClass, attrs);
+    attributes.path(newClass, attrs);
     
     return newClass;
 };
@@ -253,21 +240,6 @@ function _Class(base, proto, attrs){
 
 
 Class.EXTS = EXTS;
-// Class.PRIVATE_MEMBERS = PRIVATE_MEMBERS;
-
-/**
- * method to destroy a instance
- */
-// Class.destroy = function(instance){
-//    var destructor = instance[__DESTRUCT];
-//    destructor && destructor.call(instance);
-// };
-
-// @deprecated
-// will be removed by the next release
-Class.setAttrs = setAttrs;
-// Class.implement = implement;
-
 
 
 /**
@@ -315,6 +287,6 @@ Class.setAttrs = setAttrs;
 
 module.exports = Class;
 
-Class.EXTS.attrs = require("./lib/attrs");
+Class.EXTS.attrs = attributes._EXT;
 Class.EXTS.events = require("./lib/events");
 
