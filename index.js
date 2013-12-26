@@ -3,9 +3,10 @@
 // Use this statement, you can stay away from several frequent mistakes 
 'use strict';
 
-var _           = require('underscore');
 var clone       = require('clone');
 var attributes  = require('./lib/attrs');
+var util        = require('util');
+var _           = require('underscore');
 
 /**
  * module  oop/class
@@ -51,7 +52,7 @@ function getPrototype(obj){
     var ret;
 
     if(obj){
-        if(_.isObject(obj)){
+        if(util.isObject(obj)){
             ret = obj;
         }else if(typeof obj === 'string'){
             ret = getPrototype(EXTS[obj.toLowerCase()]);
@@ -94,7 +95,7 @@ function implement(proto, extensions, override){
         extensions = extensions.trim().split(/\s+/);
     }
 
-    if ( !_.isArray(extensions) ) {
+    if ( !util.isArray(extensions) ) {
         extensions = [extensions];
     }
 
@@ -112,17 +113,19 @@ function resetPrototypeChain(instance){
     var value, key, type, reset;
     
     for(key in instance){
-        value = instance[key];
-        
-        if(_.isObject(value)){
-            var F = function(){};
-            F.prototype = value;
-            reset = resetPrototypeChain(new F);
-        }else{
-            reset = clone(value);
+        if ( key !== attributes.KEY ) {
+            value = instance[key];
+
+            if(util.isObject(value)){
+                var F = function(){};
+                F.prototype = value;
+                reset = resetPrototypeChain(new F);
+            }else{
+                reset = clone(value);
+            }
+            
+            instance[key] = reset;
         }
-        
-        instance[key] = reset;
     }
     
     return instance;
@@ -142,7 +145,7 @@ function Class(properties, attrs){
     }
 
     // -> Class({ key: 123 })
-    if(_.isObject(properties)){
+    if(util.isObject(properties)){
         var EXTENDS = 'Extends',
             base = properties[EXTENDS];
         
@@ -152,7 +155,7 @@ function Class(properties, attrs){
     
     // -> Class(foo)    
     }else{                                     
-        var base = _.isFunction(properties) ? properties : function(){};
+        var base = util.isFunction(properties) ? properties : function(){};
         setAttrs(base, attrs);
         
         return base;
@@ -169,17 +172,16 @@ function Class(properties, attrs){
  */
 function _Class(base, proto, attrs){
     function newClass(){
-        var self = this,
-            init = initialize;
+        var init = initialize;
         
         /**
          * clean and unlink the reference relationship of the first depth between the instance and its prototype
          * and maintain prototype chain
          */
-        resetPrototypeChain(self);
+        resetPrototypeChain(this);
     
         if(init){
-            return init.apply(self, arguments);
+            return init.apply(this, arguments);
         }
     };
     
@@ -223,7 +225,7 @@ function _Class(base, proto, attrs){
     newProto.constructor = newClass;
     
     // Set class attributes
-    attributes.patch(newClass, attrs);
+    attributes.patch(newClass, attrs || {});
     
     return newClass;
 };
@@ -287,6 +289,6 @@ Class.EXTS = EXTS;
 
 module.exports = Class;
 
-Class.EXTS.attrs = attributes._EXT;
+// Class.EXTS.attrs = attributes._EXT;
 Class.EXTS.events = require("./lib/events");
 
