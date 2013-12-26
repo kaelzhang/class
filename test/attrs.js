@@ -384,7 +384,7 @@ describe('ext: attrs', function(){
     
     describe(".removeAttr(key)", function(){
         var myClass = Class({
-                // Implements: 'attrs'
+                Implements: 'attrs'
             }, {
                 a: {
                     value: 1
