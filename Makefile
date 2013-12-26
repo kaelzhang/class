@@ -3,6 +3,6 @@ REPORTER = spec
 test:
 		@./node_modules/.bin/mocha \
 			--reporter $(REPORTER) \
-			./test/attrs.js
+			./test/*.js
 
 .PHONY: test

@@ -156,7 +156,7 @@ function Class(properties, attrs){
     // -> Class(foo)    
     }else{                                     
         var base = util.isFunction(properties) ? properties : function(){};
-        setAttrs(base, attrs);
+        attrs && attributes.set(base, attrs);
         
         return base;
     }
@@ -223,9 +223,8 @@ function _Class(base, proto, attrs){
     
     // fix constructor
     newProto.constructor = newClass;
-    
-    // Set class attributes
-    attributes.patch(newClass, attrs || {});
+
+    attrs && attributes.set(newClass, attrs);
     
     return newClass;
 };
@@ -289,6 +288,6 @@ Class.EXTS = EXTS;
 
 module.exports = Class;
 
-// Class.EXTS.attrs = attributes._EXT;
+Class.EXTS.attrs = attributes._EXT;
 Class.EXTS.events = require("./lib/events");
 

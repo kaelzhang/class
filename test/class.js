@@ -5,12 +5,10 @@ var Class   = require('../');
 var expect  = require('./lib/expect');
 
 
-describe('Neuron: oop/class', function(){
+describe('class', function(){
 
-describe('Class', function(){
-    var Class = NR.Class,
-        
-        myClass = Class({
+describe('Class', function(){     
+    var myClass = Class({
             initialize: function(n){
                 this.c = n;
             },
@@ -121,7 +119,7 @@ describe('Class', function(){
         
         expect(c.method()).toBe(1);
         expect(c.method2()).toBe(10);
-        expect(cp.method2).toBeUndefined();
+        expect(cp.method2 === undefined).toBe(true);
         
         expect(c.a.a).toBe(1);
         delete c.a.a;
@@ -129,7 +127,7 @@ describe('Class', function(){
         
     });
     
-    it('could inherit from a NR.Class constructor', function(){
+    it('could inherit from a Class constructor', function(){
         var parentClass = Class({
             a: {
                 a: 1
@@ -157,7 +155,7 @@ describe('Class', function(){
         
         expect(c.method()).toBe(1);
         expect(c.method2()).toBe(10);
-        expect(cp.method2).toBeUndefined();
+        expect(cp.method2 === undefined).toBe(true);
         
         expect(c.a.a).toBe(1);
         delete c.a.a;
