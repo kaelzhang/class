@@ -3,7 +3,10 @@
 // Use this statement, you can stay away from several frequent mistakes 
 'use strict';
 
-var lang = require("lang");
+var _           = require('underscore');
+var clone       = require('clone');
+var node_util   = require('util');
+var events      = require('events');
 
 /**
  * module  oop/class
@@ -49,7 +52,7 @@ function getPrototype(obj){
     var ret;
 
     if(obj){
-        if(lang.isPlainObject(obj)){
+        if(_.isObject(obj)){
             ret = obj;
         }else if(typeof obj === 'string'){
             ret = getPrototype(EXTS[obj.toLowerCase()]);
@@ -71,10 +74,10 @@ function getPrototype(obj){
 function implementOne(host, alien, override){
     // prototype Object for mixin 
     var proto = getPrototype(alien);
-    proto && lang.mix(
+    proto && _.extend(
         host, 
-        lang.clone(proto),
-        // lang.clone(proto, function(value, key){
+        clone(proto),
+        // clone(proto, function(value, key){
         //    return PRIVATE_MEMBERS.indexOf(key) === -1;
         // }),
         
@@ -92,7 +95,11 @@ function implement(proto, extensions, override){
         extensions = extensions.trim().split(/\s+/);
     }
 
-    lang.makeArray(extensions).forEach(function(alien){
+    if ( !_.isArray(extensions) ) {
+        extensions = [extensions];
+    }
+
+    extensions.forEach(function(alien){
         implementOne(this, alien, override);
     }, proto);
 };
@@ -104,7 +111,7 @@ function implement(proto, extensions, override){
 function setAttrs(class_, attrs){
     var parent = class_.prototype.superClass;
     
-    class_.ATTRS = lang.mix(attrs || {}, lang.clone(parent && parent.ATTRS), false);
+    class_.ATTRS = _.extend(attrs || {}, clone(parent && parent.ATTRS), false);
 };
 
 
@@ -118,12 +125,12 @@ function resetPrototypeChain(instance){
     for(key in instance){
         value = instance[key];
         
-        if(lang.isPlainObject(value)){
+        if(_.isObject(value)){
             var F = function(){};
             F.prototype = value;
             reset = resetPrototypeChain(new F);
         }else{
-            reset = lang.clone(value);
+            reset = clone(value);
         }
         
         instance[key] = reset;
@@ -146,7 +153,7 @@ function Class(properties, attrs){
     }
 
     // -> Class({ key: 123 })
-    if(lang.isObject(properties)){
+    if(_.isObject(properties)){
         var EXTENDS = 'Extends',
             base = properties[EXTENDS];
         
@@ -156,7 +163,7 @@ function Class(properties, attrs){
     
     // -> Class(foo)    
     }else{                                     
-        var base = lang.isFunction(properties) ? properties : function(){};
+        var base = _.isFunction(properties) ? properties : function(){};
         setAttrs(base, attrs);
         
         return base;
@@ -211,7 +218,7 @@ function _Class(base, proto, attrs){
         exts && implement(newProto, exts, true);
         
         newProto.superClass = base;
-        lang.mix(newProto, proto);
+        _.extend(newProto, proto);
         
     }else{
     
@@ -308,5 +315,6 @@ Class.setAttrs = setAttrs;
 
 module.exports = Class;
 
-Class.EXTS.attrs = require("./attrs");
-Class.EXTS.events = require("./events");
+Class.EXTS.attrs = require("./lib/attrs");
+Class.EXTS.events = require("./lib/events");
+
