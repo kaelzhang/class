@@ -32,13 +32,16 @@
     "dependencies": {
       "clone": "~0.1.11",
       "events": "~1.0.0",
-      "underscore": "~1.5.2"
+      "underscore": "~1.5.2",
+      "util": "~1.0.0"
     }
   },
   "devDependencies": {
-    "clone": "~0.1.11",
-    "underscore": "~1.5.2",
     "chai": "~1.8.1",
     "mocha": "~1.16.2"
+  },
+  "dependencies": {
+    "clone": "~0.1.11",
+    "underscore": "~1.5.2"
   }
 }
