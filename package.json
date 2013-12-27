@@ -1,7 +1,7 @@
 {
   "name": "class",
   "description": "The best project ever.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "homepage": "https://github.com/kaelzhang/neuro-class",
   "author": {
     "name": "kael",
@@ -27,7 +27,6 @@
     "test": "make test"
   },
   "keywords": [],
-  "main": "lib/index.js",
   "cortex": {
     "dependencies": {
       "clone": "~0.1.11",
