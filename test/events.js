@@ -14,7 +14,7 @@ describe("Class ext: events", function(){
         });
 
 
-    describe(".on(), feated with .fire()", function(){
+    describe(".on(), feated with .emit()", function(){
         it("could register a sync event handler", function(){
             var flag = true;
                 
@@ -24,10 +24,10 @@ describe("Class ext: events", function(){
         
             expect(flag).toBe(true);
             
-            obj.fire('myEvent');
+            obj.emit('myEvent');
             expect(flag).toBe(false);
             
-            obj.fire('myEvent');
+            obj.emit('myEvent');
             expect(flag).toBe(true);
         });
         
@@ -46,10 +46,10 @@ describe("Class ext: events", function(){
         //             }
         //         });
             
-        //     obj.fire('event1');
+        //     obj.emit('event1');
         //     expect(flag1).toBe(false);
             
-        //     obj.fire('event2');
+        //     obj.emit('event2');
         //     expect(flag2).toBe(false);
         // });
         
@@ -60,7 +60,7 @@ describe("Class ext: events", function(){
             
             expect(obj.a).toBe(1);
             
-            obj.fire('increase');
+            obj.emit('increase');
             expect(obj.a).toBe(2);
         });
         
@@ -77,7 +77,7 @@ describe("Class ext: events", function(){
         
             expect(obj.a).toBe(1);
             
-            obj.fire('increase');
+            obj.emit('increase');
             expect(obj.a).toBe(3);
         });
         
@@ -94,44 +94,39 @@ describe("Class ext: events", function(){
             
             expect(obj.c).toBe(undefined);
             
-            obj.fire('increase');
+            obj.emit('increase');
             expect(obj.c === 2).toBe(false);
             expect(obj.c).toBe(4);
         });
     });
 
-    describe(".off(type, fn), feated with .fire()", function(){
+    describe(".removeListener(type, fn), feated with .emit()", function(){
     
         it("should return the instance", function(){
             var handler = function(){},
                 obj = new EventClass().on('increase', handler);
         
-            expect(obj.off('increase', handler)).toBe(obj);
-            expect(obj.off('increase')).toBe(obj);
-            expect(obj.off()).toBe(obj);
-            
-            // error invocation
-            expect(obj.off(null)).toBe(obj);
-            expect(obj.off(null, null)).toBe(obj);
-            expect(obj.off(null, handler)).toBe(obj);
+            expect(obj.removeListener('increase', handler)).toBe(obj);
+            expect(obj.removeAllListeners('increase')).toBe(obj);
+            expect(obj.removeAllListeners()).toBe(obj);
         });
         
-        it("could remove a specific handler of a certain type: .off(type, fn)", function(){
+        it("could remove a specific handler of a certain type: .removeListener(type, fn)", function(){
             var flag = 1,
                 handler = function(){
                     flag ++;  
                 },
                 obj = new EventClass().on('increase', handler);
             
-            obj.fire('increase');
+            obj.emit('increase');
             expect(flag).toBe(2);
             
-            obj.off('increase', handler);
-            obj.fire('increase');
+            obj.removeListener('increase', handler);
+            obj.emit('increase');
             expect(flag).toBe(2);
         });
         
-        it("could remove all handlers of a certain type: .off(type)", function(){
+        it("could remove all handlers of a certain type: .removeListener(type)", function(){
             var flag = 1,
                 handler = function(){
                     flag ++;  
@@ -141,12 +136,12 @@ describe("Class ext: events", function(){
                 },
                 obj = new EventClass().on('increase', handler).on('increase', handler2);
             
-            obj.off('increase');
-            obj.fire('increase');
+            obj.removeAllListeners('increase');
+            obj.emit('increase');
             expect(flag).toBe(1);
         });
         
-        it("could remove all registered events: .off()", function(){
+        it("could remove all registered events: .removeListener()", function(){
             var flag = 1,
                 handler = function(){
                     flag ++;  
@@ -156,35 +151,15 @@ describe("Class ext: events", function(){
                 },
                 obj = new EventClass().on('increase1', handler).on('increase2', handler2);
             
-            obj.off();
-            obj.fire('increase1');
-            obj.fire('increase2');
+            obj.removeAllListeners();
+            obj.emit('increase1');
+            obj.emit('increase2');
             expect(flag).toBe(1);
-        });
-        
-        it("would do nothing if bad arguments", function(){
-            var flag = 1,
-                handler = function(){
-                    flag ++;  
-                },
-                handler2 = function(){
-                    flag = flag + 2;  
-                },
-                obj = new EventClass().on('increase1', handler).on('increase1', handler).on('increase2', handler2);
-            
-            obj.off(undefined);
-            obj.off(undefined, handler);
-            obj.off(undefined, undefined);
-            obj.off('increase1', undefined);
-            
-            obj.fire('increase1');
-            obj.fire('increase2');
-            expect(flag).toBe(5);
         });
     });
     
     
-    describe(".fire()", function(){
+    describe(".emit()", function(){
         
         it("normal fire, which tested before", function(){
             expect().toBe();
