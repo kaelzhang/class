@@ -102,7 +102,7 @@ Implements: [constructor, singleton, 'events']
 
 ### events
 
-If you `Implements: 'events'`, the constructor will be an [EventEmitter](http://nodejs.org/api/events.html) and will has exactly the same APIs as node's
+If you `Implements: 'events'`, the constructor will be an [EventEmitter](http://nodejs.org/api/events.html) and will has exactly the same APIs as nodejs's.
 
 ### attrs
 
@@ -145,14 +145,14 @@ After implementing `'attrs'`, the prototype of the constructor will have 4 metho
 - set: set a key or list of keys
 - removeAttr: remove an attribute
 
-More details about `'attrs'`, search package 'attributes' in the cortex registry.
+See [`attributes`](http://search.cortexjs.org/package/attributes) for more details about `'attrs'`.
 
 
 ## API Documentation
 
-### factory: Class
+### factory: Class(definition, attributes)
 
-Create a new class.
+Creates a new class.
 
 ```
 var MyClass = Class(definition, attributes);
