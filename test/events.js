@@ -1,7 +1,7 @@
 'use strict';
 
 var _       = require('underscore');
-var Class   = require('../');
+var Class   = require('../index');
 var expect  = require('./lib/expect');
 
 describe("events", function(){
