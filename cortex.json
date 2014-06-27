@@ -1,0 +1,26 @@
+{
+  "name": "class",
+  "version": "2.0.5",
+  "description": "The inheritance implementation of class for JavaScript modules.",
+  "main": "index.js",
+  "repository": "git://code.dianpingoa.com/neurons/class.git",
+  "keywords": [
+    "class",
+    "oop"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "http://code.dianpingoa.com/neurons/class/issues"
+  },
+  "homepage": "http://code.dianpingoa.com/neurons/class",
+  "dependencies": {
+    "clone": "~0.1.11",
+    "events": "~1.0.0",
+    "underscore": "^1.5.2",
+    "util": "~1.0.0",
+    "chai": "~1.9.1"
+  },
+  "devDependencies": {
+    "assert": "*"
+  }
+}

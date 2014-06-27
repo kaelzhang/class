@@ -37,18 +37,6 @@
     "extend",
     "implement"
   ],
-  "cortex": {
-    "dependencies": {
-      "clone": "~0.1.11",
-      "events": "~1.0.0",
-      "underscore": "~1.5.2",
-      "util": "~1.0.0",
-      "chai": "~1.9.1"
-    },
-    "asyncDependencies": {},
-    "devDependencies": {},
-    "scripts": {}
-  },
   "devDependencies": {
     "chai": "~1.8.1",
     "mocha": "~1.16.2"
